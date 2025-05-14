@@ -3,7 +3,6 @@ package com.petrvalouch.event_creator_api.event;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public class UpdateEventDTO {
     @NotBlank(message = "event name is required")
