@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.petrvalouch.event_creator_api.common.exceptions.EventNotFoundException;
+
 @Service
 public class EventService {
 
@@ -30,7 +32,7 @@ public class EventService {
         return this.repo.findById(id);
     }
 
-    public boolean deleteById(Long id) {
+    public boolean deleteById(Long id) throws EventNotFoundException {
         Optional<Event> result = this.getById(id);
         if (result.isEmpty()) {
             return false;
@@ -49,7 +51,4 @@ public class EventService {
         this.repo.save(foundEvent);
         return Optional.of(foundEvent);
     }
-
-    
-    
 }
