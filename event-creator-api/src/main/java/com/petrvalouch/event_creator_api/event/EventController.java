@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.petrvalouch.event_creator_api.common.exceptions.EventNotFoundException;
+
 import jakarta.validation.Valid;
 
 @RestController
@@ -39,16 +41,16 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Event> getById(@PathVariable Long id) {
+    public ResponseEntity<Event> getById(@PathVariable Long id) throws EventNotFoundException {
         Optional<Event> result = this.eventService.getById(id);
-        Event foundEvent = result.orElseThrow();
+        Event foundEvent = result.orElseThrow(() -> new EventNotFoundException(id));
         return new ResponseEntity<>(foundEvent, HttpStatus.OK);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Event> updateById(@PathVariable Long id, @Valid @RequestBody UpdateEventDTO data) {
         Optional<Event> result = this.eventService.updateById(id, data);
-        Event foundEvent = result.orElseThrow();
+        Event foundEvent = result.orElseThrow(() -> new EventNotFoundException(id));
         return new ResponseEntity<>(foundEvent, HttpStatus.OK);
     }
 
@@ -56,7 +58,7 @@ public class EventController {
     public ResponseEntity<?> deleteById(@PathVariable Long id) throws Exception {
         boolean wasDeleted = this.eventService.deleteById(id);
         if(!wasDeleted) {
-            throw new Exception("Could not delete.");
+            throw new EventNotFoundException(id);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
