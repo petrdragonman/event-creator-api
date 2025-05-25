@@ -121,25 +121,6 @@ public class EventServiceTest {
         verify(eventRepo, times(1)).findById(nonExistentEventId);
     }
 
-    // @Test
-    // void updateEventByIdShouldReturnUpdatedEventSuccessfully() {
-    //     // Arange
-    //     //CreateEventDTO updateEventDTO = new CreateEventDTO();
-    //     Long eventId = 1L;
-    //     Event eventToUpdate = events.get(0);
-    //     eventToUpdate.setEventName("updated event");
-
-    //     // Event to EventDTO
-    //     UpdateEventDTO updateEventDTO = modelMapper.map(eventToUpdate, UpdateEventDTO.class);
-
-    //     // Act
-    //     Optional<Event> result = eventService.updateById(eventId, updateEventDTO);
-
-    //     // Assert
-    //     assertEquals(eventToUpdate.getId(), events.get(0).getId());
-    //     assertTrue(eventToUpdate.getEventName() == "updated event");
-    // }
-
     @Test
     void updateEventByIdShouldReturnUpdatedEventSuccessfully() {
         // Arrange
@@ -160,7 +141,7 @@ public class EventServiceTest {
         doAnswer(request -> {
             UpdateEventDTO source = request.getArgument(0);
             Event destination = request.getArgument(1);
-            // Implement the mapping behavior you expect
+            
             destination.setEventName(source.getEventName());
             destination.setStartDate(source.getStartDate());
             destination.setEndDate(source.getEndDate());
