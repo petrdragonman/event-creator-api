@@ -2,20 +2,15 @@ package com.petrvalouch.event_creator_api.event;
 
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class UpdateEventDTO {
-    //@NotBlank(message = "event name is required")
     private String eventName;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    //@NotBlank(message = "location is required")
     private String location;
 
-    //@NotBlank(message = "label is required")
     private String label;
 
     public String getEventName() {
