@@ -12,7 +12,7 @@
 	<artifactId>event-creator-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>event-creator-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Event Calendar API project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
